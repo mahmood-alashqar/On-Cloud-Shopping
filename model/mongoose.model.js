@@ -14,8 +14,10 @@ const productsShema = mongoose.Schema({
     trim: true
   },
   img: String,
-  description: String,
-  modified: Array
+  price: String,
+  colour:String,
+  brand: String,
+  comment:String
 })
 const ProductsModel = new mongoose.model('products', productsShema);
 module.exports = ProductsModel;

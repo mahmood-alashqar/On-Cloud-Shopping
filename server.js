@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 8080;
 const app =express();
 app.use(cors());
 app.use(express.json());
+const CRUD = require('./controller/CRUD.controller');
+
 const DB = process.env.DATABASE_URL;
 mongoose.connect(`${DB}`, {
     useNewUrlParser: true,
@@ -21,7 +23,10 @@ app.get('/',(req,res)=> {res.send('its Working')});
 
 app.get('/products', getProducts);
 
-
+app.post('/products/Favorite', CRUD.postProduct);
+app.get('/products/Favorite', CRUD.getProducts);
+app.delete('/products/Favorite/:slug', CRUD.deleteProduct);
+app.put('/products/Favorite/:slug', CRUD.updateProduct);
 
 
 

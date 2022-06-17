@@ -7,8 +7,7 @@ class Shop {
       this.price = `${data.price.current.value}${data.price.currency}`;
       this.colour = data.colour;
       this.brand=data.brandName;
-
-
+      this.url=data.url;
     }
   }
   module.exports = Shop;
