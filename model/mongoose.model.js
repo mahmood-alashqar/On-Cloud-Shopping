@@ -17,7 +17,8 @@ const productsShema = mongoose.Schema({
   price: String,
   colour:String,
   brand: String,
-  comment:String
+  comment:String,
+  comments:[String]
 })
 const ProductsModel = new mongoose.model('products', productsShema);
 module.exports = ProductsModel;
