@@ -113,8 +113,11 @@ export class Profile extends Component {
                   <Card.Footer>{data.price}</Card.Footer>
                   <>
                     {data.comments.map((comment, idx) => {
-                       return(comment != null &&
-                        <Card.Subtitle>{comment}</Card.Subtitle>)})}
+                      return (comment != null &&
+                        <blockquote class="blockquote mb-0">
+                          <footer class="blockquote-footer">{comment}</footer>
+                        </blockquote>)
+                    })}
                   </>
                   <Form onSubmit={(e) => this.addComment(e,data.slug)}>
                     <FormControl onChange={(e) => this.updateComment(e)} type='text' />
