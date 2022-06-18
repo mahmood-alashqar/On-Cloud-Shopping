@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Button, Row, Form, FormControl } from 'react-bootstrap';
-import { Comment } from 'semantic-ui-react';
+import { Card, Button, Row } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
 import './style.css';
 export class Main extends Component {
