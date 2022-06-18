@@ -27,7 +27,7 @@ app.post('/products/Favorite', CRUD.postProduct);
 app.get('/products/Favorite', CRUD.getProducts);
 app.delete('/products/Favorite/:slug', CRUD.deleteProduct);
 app.put('/products/Favorite/:slug', CRUD.updateProduct);
-
+app.post('/products/Favorite/:slug', CRUD.addComments);
 
 
 app.listen(PORT,()=>console.log(`Server Running On ${PORT}`));

@@ -61,9 +61,25 @@ async function getProducts(req, res) {
     })
   }
 
+  async function addComments(req, res) {
+    const { comment } = req.body;
+    ProductsModel.findOne({ slug: req.params.slug }, (error, data) => {
+      if (error) {
+        res.send(error);
+      }
+      else {
+        data.comments.push(comment); 
+        data.save().then(() => ProductsModel.find({}, (error, data) => res.send(data))).catch(error => {
+          console.log('CRUD LiNE:58 ',error.response)
+      })
+      }
+    })
+  }
+
   module.exports={
 getProducts,
 postProduct,
 deleteProduct,
-updateProduct
+updateProduct,
+addComments
   }

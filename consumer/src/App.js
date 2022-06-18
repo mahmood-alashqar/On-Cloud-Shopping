@@ -10,19 +10,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 export class App extends Component {
   render() {
     return (
-      <div>
-        {/* <Header />
-        <Main />
-        
-        <LogoutButton />
-        <>{this.props.auth0.isAuthenticated &&
-          <>
-            <Profile />
-          </>
-        }
-        </> */}
-        <>
-        {/* <Header /> */}
+      <>
         <BrowserRouter>
           <Switch>
             <Route exact path='/'>
@@ -35,7 +23,6 @@ export class App extends Component {
           </Switch>
         </BrowserRouter>
       </>
-      </div>
     )
   }
 }
