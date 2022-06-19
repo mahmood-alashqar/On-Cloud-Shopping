@@ -3,7 +3,7 @@ class Shop {
   constructor(data) {
      this.comments = new Array();
       this.id=data.id;
-      this.name = data.name;
+      this.name = data.name.replace('/','%');
       this.slug = data.name.toLowerCase().split(' ').join('-');
       this.img =`http://${data.imageUrl}`;
       this.price = `${data.price.current.value}${data.price.currency}`;

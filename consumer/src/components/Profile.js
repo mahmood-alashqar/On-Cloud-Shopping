@@ -22,7 +22,6 @@ export class Profile extends Component {
     this.setState({
       productData: getRequest.data
     })
-
   }
   deleteData = async (slug) => {
     const deleteRequest = await axios.delete(`${this.state.API}/products/Favorite/${slug}`);
@@ -32,20 +31,16 @@ export class Profile extends Component {
   }
   updateSlug = async (e, slug) => {
     e.preventDefault();
-    
     this.setState({
       slug: slug,
       showForm: true
-    })    
+    })
   }
   updateName = async (e) => {
     e.preventDefault();
-    
     this.state = {
       name: e.target.value
     }
-    console.log('update Target', e.target.value);
-    
   }
   updateData = async (e) => {
     e.preventDefault();
@@ -53,8 +48,8 @@ export class Profile extends Component {
       name: this.state.name
     }
     console.log('update LiNE: 71', this.state.slug);
-    
-    const updateRequest = await axios.put(`http://localhost:8088/products/Favorite/${this.state.slug}`, body);
+
+    const updateRequest = await axios.put(`${this.state.API}/products/Favorite/${this.state.slug}`, body);
     this.setState({
       productData: updateRequest.data
     })
@@ -80,17 +75,20 @@ export class Profile extends Component {
       modal.style.display = "none";
     }
   }
-  addComment = async (e,slug) => {
+  addComment = async (e, slug) => {
     e.preventDefault();
-    const body={
-      slug:slug,
-      comment:this.state.comment
+    const body = {
+      slug: slug,
+      comment: this.state.comment
     }
-    await axios.post(`${this.state.API}/products/Favorite/${slug}`, body);
-  }
-  updateComment=(e)=>{
+    const updatedData = await axios.post(`${this.state.API}/products/Favorite/${slug}`, body);
     this.setState({
-      comment:e.target.value
+      productData: updatedData.data
+    })
+  }
+  updateComment = (e) => {
+    this.setState({
+      comment: e.target.value
     })
   }
   render() {
@@ -109,14 +107,20 @@ export class Profile extends Component {
                 </div>
                 <Card.Body>
                   <Card.Title>{data.name}</Card.Title>
+                  <br />
                   <Card.Subtitle>{data.colour}</Card.Subtitle>
                   <Card.Footer>{data.price}</Card.Footer>
+                  <br />
                   <>
                     {data.comments.map((comment, idx) => {
-                       return(comment != null &&
-                        <Card.Subtitle>{comment}</Card.Subtitle>)})}
+                      return (<div key={idx}> 
+                        {comment != null &&
+                          <><blockquote class="blockquote mb-0" style={{border:'1px'}}>
+                            <footer class="blockquote-footer">{comment}</footer>
+                          </blockquote><br /></>}</div>)
+                    })}
                   </>
-                  <Form onSubmit={(e) => this.addComment(e,data.slug)}>
+                  <Form onSubmit={(e) => this.addComment(e, data.slug)}>
                     <FormControl onChange={(e) => this.updateComment(e)} type='text' />
                     <Button variant="primary" type='submit' value='Update'>Add Comment</Button>
                   </Form>
@@ -133,12 +137,12 @@ export class Profile extends Component {
     return (
       <div>
         {this.state.showForm &&
-          <Form onSubmit={(e) => this.updateData(e)} style={{position:'relative'}}>
-            <FormControl onChange={() => this.updateName} type='text' />
+          <Form onSubmit={(e) => this.updateData(e)} style={{ position: 'relative' }}>
+            <FormControl onChange={(e) => this.updateName(e)} type='text' />
             <Button variant="primary" type='submit' value='Update'>Update</Button>
           </Form>
         }
-        <Header/>
+        <Header />
         {rendering}
       </div>
     )
