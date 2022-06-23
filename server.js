@@ -5,7 +5,11 @@ const cors = require('cors');
 require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 const app =express();
-app.use(cors());
+let corsOptions = {
+  origin: "https://62b3c29b86ac7f183eb470aa--coruscating-narwhal-6d4205.netlify.app",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 const CRUD = require('./controller/CRUD.controller');
 
