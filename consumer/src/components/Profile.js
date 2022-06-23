@@ -1,9 +1,8 @@
-import { withAuth0 } from '@auth0/auth0-react';
-
 import axios from 'axios';
 import React, { Component } from 'react'
 import { Card, Button, Row, Form, FormControl } from 'react-bootstrap';
 import Header from './Header';
+import Loading from './Loading';
 import './style.css';
 
 export class Profile extends Component {
@@ -14,13 +13,15 @@ export class Profile extends Component {
       productData: [],
       name: '',
       slug: '',
-      showForm: false
+      showForm: false,
+      loading:true
     }
   }
   componentDidMount = async () => {
     const getRequest = await axios.get(`${this.state.API}/products/Favorite`);
     this.setState({
-      productData: getRequest.data
+      productData: getRequest.data,
+      loading:false
     })
   }
   deleteData = async (slug) => {
@@ -38,26 +39,22 @@ export class Profile extends Component {
   }
   updateName = async (e) => {
     e.preventDefault();
-    this.state = {
+    this.setState ( {
       name: e.target.value
-    }
+    })
   }
   updateData = async (e) => {
     e.preventDefault();
     const body = {
       name: this.state.name
     }
-    console.log('update LiNE: 71', this.state.slug);
-
     const updateRequest = await axios.put(`${this.state.API}/products/Favorite/${this.state.slug}`, body);
     this.setState({
       productData: updateRequest.data
     })
   }
   imagePopUp = (e) => {
-    // Get the modal
     var modal = document.getElementById("myModal");
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
     var modalImg = document.getElementById("modal-img");
     var captionText = document.getElementById("caption");
     document.addEventListener("click", (e) => {
@@ -68,9 +65,7 @@ export class Profile extends Component {
         captionText.innerHTML = elem.alt;
       }
     })
-    // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
       modal.style.display = "none";
     }
@@ -92,17 +87,17 @@ export class Profile extends Component {
     })
   }
   render() {
-    const rendering = <Row xs={1} md={4} className="g-3" >
+    const rendering = <Row xs={1} md={6} className="g-3" >
       {
         this.state.productData.map((data, idx) => {
           return (
             <div key={idx}>
-              <Card style={{ width: '18rem', height: '40rem' }}>
-                <Card.Img variant="top" src={data.img} id="myImg" class="img-fluid"
+              <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={data.img} id="myImg" className="img-fluid"
                   data-bigger-src={data.img} alt='' onClick={(e) => { this.imagePopUp(e) }} />
-                <div id="myModal" class="modal">
-                  <span class="close">&times;</span>
-                  <img id="modal-img" class="modal-content" alt='' src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQS2ol73JZj6-IqypxPZXYS3rRiPwKteoD8vezk9QsRdkjt3jEn&usqp=CAU" />
+                <div id="myModal" className="modal">
+                  <span className="close">&times;</span>
+                  <img id="modal-img" className="modal-content" alt='' src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQS2ol73JZj6-IqypxPZXYS3rRiPwKteoD8vezk9QsRdkjt3jEn&usqp=CAU" />
                   <div id="caption"></div>
                 </div>
                 <Card.Body>
@@ -113,10 +108,10 @@ export class Profile extends Component {
                   <br />
                   <>
                     {data.comments.map((comment, idx) => {
-                      return (<div key={idx}> 
+                      return (<div key={idx}>
                         {comment != null &&
-                          <><blockquote class="blockquote mb-0" style={{border:'1px'}}>
-                            <footer class="blockquote-footer">{comment}</footer>
+                          <><blockquote className="blockquote mb-0" style={{ border: '1px' , boxSizing:'content-box'}}>
+                            <footer className="blockquote-footer">{comment}</footer>
                           </blockquote><br /></>}</div>)
                     })}
                   </>
@@ -136,17 +131,20 @@ export class Profile extends Component {
     </Row>
     return (
       <div>
+        <Header />
         {this.state.showForm &&
           <Form onSubmit={(e) => this.updateData(e)} style={{ position: 'relative' }}>
             <FormControl onChange={(e) => this.updateName(e)} type='text' />
             <Button variant="primary" type='submit' value='Update'>Update</Button>
           </Form>
         }
-        <Header />
-        {rendering}
+        {this.state.loading &&
+        <Loading loading={this.state.loading}/>}
+        {!this.state.loading &&
+        rendering}
       </div>
     )
   }
 }
 
-export default withAuth0(Profile)
+export default Profile
