@@ -47,12 +47,9 @@ async function getProducts(req, res) {
 
     ProductsModel.findOne({ slug: req.params.slug }, (error, data) => {
       if (error) {
-        console.log("Line:  49  First If True  ==>",error )
         res.send(error);
       }
       else {
-        console.log("Line:  54  First If False ==> ",data.name )
-
         data.name = name; 
         data.save().then(() => ProductsModel.find({}, (error, data) => res.send(data))).catch(error => {
           console.log('CRUD LiNE:58 ',error.response)

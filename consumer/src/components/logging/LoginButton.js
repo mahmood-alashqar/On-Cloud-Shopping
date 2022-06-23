@@ -6,9 +6,9 @@ function LoginButton() {
   const { isAuthenticated, loginWithRedirect, } = useAuth0();
   return !isAuthenticated && (
     <>
-      <Button class="bg-light border  btn-sm" variant='success' direction="horizontal" onClick={loginWithRedirect}>Log in</Button>
+      <Button variant="primary"  onClick={()=>loginWithRedirect('/favorite')}>Log in</Button>
     </>
   );
 }
 
-export default withAuth0(LoginButton);
+export default withAuth0(LoginButton)

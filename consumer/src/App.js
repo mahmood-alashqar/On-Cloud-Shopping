@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
-import { withAuth0 } from "@auth0/auth0-react";
 import Profile from './components/Profile';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 
 export class App extends Component {
   render() {
@@ -12,11 +12,14 @@ export class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path='/'>
-              <Header/>
+              <Header />
               <Main />
             </Route>
             <Route exact path='/favorite'>
-              <Profile />
+              <Profile/>
+            </Route>
+            <Route exact path='/favorite'>
+              <Header />
             </Route>
           </Switch>
         </BrowserRouter>
@@ -25,4 +28,4 @@ export class App extends Component {
   }
 }
 
-export default withAuth0(App)
+export default App
