@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 export class App extends Component {
   render() {
     return (
-      <>
+ <>
         <BrowserRouter>
           <Switch>
             <Route exact path='/'>
@@ -16,10 +16,8 @@ export class App extends Component {
               <Main />
             </Route>
             <Route exact path='/favorite'>
+              <Header/>
               <Profile/>
-            </Route>
-            <Route exact path='/favorite'>
-              <Header />
             </Route>
           </Switch>
         </BrowserRouter>
