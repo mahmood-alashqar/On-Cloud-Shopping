@@ -16,7 +16,6 @@ export class App extends Component {
               <Main />
             </Route>
             <Route exact path='/favorite'>
-              <Header/>
               <Profile/>
             </Route>
           </Switch>
