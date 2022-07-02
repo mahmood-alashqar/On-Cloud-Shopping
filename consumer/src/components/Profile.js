@@ -50,7 +50,8 @@ export class Profile extends Component {
     }
     const updateRequest = await axios.put(`${this.state.API}/products/Favorite/${this.state.slug}`, body);
     this.setState({
-      productData: updateRequest.data
+      productData: updateRequest.data,
+      showForm:false
     })
   }
   imagePopUp = (e) => {
@@ -78,7 +79,7 @@ export class Profile extends Component {
     }
     const updatedData = await axios.post(`${this.state.API}/products/Favorite/${slug}`, body);
     this.setState({
-      productData: updatedData.data
+      productData: updatedData.data,
     })
   }
   updateComment = (e) => {

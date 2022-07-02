@@ -42,9 +42,6 @@ async function getProducts(req, res) {
 
   async function updateProduct(req, res) {
     const { name } = req.body;
-    console.log("LiNE:44, req.body",req.body)
-    console.log("LiNE:45, req.params",req.params.slug)
-
     ProductsModel.findOne({ slug: req.params.slug }, (error, data) => {
       if (error) {
         res.send(error);
@@ -52,7 +49,7 @@ async function getProducts(req, res) {
       else {
         data.name = name; 
         data.save().then(() => ProductsModel.find({}, (error, data) => res.send(data))).catch(error => {
-          console.log('CRUD LiNE:58 ',error.response)
+          console.log(error.response)
       })
       }
     })
@@ -67,7 +64,7 @@ async function getProducts(req, res) {
       else {
         data.comments.push(comment); 
         data.save().then(() => ProductsModel.find({}, (error, data) => res.send(data))).catch(error => {
-          console.log('CRUD LiNE:58 ',error.response)
+          console.log(error.response)
       })
       }
     })
