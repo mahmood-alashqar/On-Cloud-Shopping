@@ -1,5 +1,6 @@
 //loading/require package
 const mongoose = require('mongoose');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -15,11 +16,23 @@ app.use(express.json());
 
 const CRUD = require('./controller/CRUD.controller');
 
-const DB = process.env.DATABASE_URL;
+// const DB = process.env.DATABASE_URL;
+const DB = process.env.MONGO_DB_CLOUD_URI;
+
 mongoose.connect(`${DB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
+// const client = new MongoClient(`${DB}`, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// client.connect(err => {
+//   const collection = client.db("Shopping").collection("products");
+//   // perform actions on the collection object
+//   client.close();
+// });
+
+
+
+
   
 const getProducts = require('./controller/starter.controller');  
 
