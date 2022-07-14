@@ -18,10 +18,10 @@ mongoose.connect(`${DB}`, {
 
 
 //Testing....
-app.get(appConstants.appConstants.ENDPOINT.ROOT,(req,res)=> {res.send('its Working')});
+app.get(appConstants.appConstants.ENDPOINT.ROOT,getProducts.myJavaEndPointTest);
 
 //Fetch From Out-Source Api
-app.get(appConstants.appConstants.ENDPOINT.GET_PRODUCTS, getProducts);
+app.get(appConstants.appConstants.ENDPOINT.GET_PRODUCTS, getProducts.superagentData);
 //Rest-Api
 app.post(appConstants.appConstants.ENDPOINT.REST_API, CRUD.postProduct);
 app.get(appConstants.appConstants.ENDPOINT.REST_API, CRUD.getProducts);
