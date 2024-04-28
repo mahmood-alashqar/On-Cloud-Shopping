@@ -2,7 +2,7 @@ const apiConstants={
     RAPID_API:{
         key_name:"'X-RapidAPI-Key'",
         key_value:process.env.API_Key,
-        host_name:"'X-RapidAPI-Key'",
+        host_name:"'X-RapidAPI-Host'",
         host_value:process.env.API_Host,
         method:'GET',
         url:'https://asos2.p.rapidapi.com/products/v2/list',
